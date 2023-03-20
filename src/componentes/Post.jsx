@@ -1,6 +1,5 @@
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/esm/locale/pt-BR/index.js";
-import ptBr from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
 import { Avatar } from "./Avatar";
@@ -25,14 +24,22 @@ export function Post({ author, publishedAt, content }) {
     })
 
     function handleCreateNewComment() {
-        event.preventDefault();
+        event.preventDefault()
 
         setComments([...comments, newCommentText]);
-        setNewCommentText("");
+        setNewCommentText("")
     }
 
     function handleNewCommentChange() {
         setNewCommentText(event.target.value)
+    }
+
+    function deleteComment(commentToDelete) {
+        const commentsWithoutDeletedOne = comments.filter((comment) => {
+            return comment !== commentToDelete
+        })
+
+        setComments(commentsWithoutDeletedOne)
     }
 
     return (
@@ -78,7 +85,7 @@ export function Post({ author, publishedAt, content }) {
             </form>
             <div className={styles.commentList}>
                 {comments.map(comment => {
-                    return <Comment key={comment} content={comment} />
+                    return <Comment key={comment} content={comment} deleteComment={deleteComment}/>
                 })}
             </div>
 
