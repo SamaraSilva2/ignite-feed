@@ -4,11 +4,10 @@ import { Avatar } from './Avatar'
 
 import styles from './Comment.module.css'
 
-export function Comment({ content, onDeleteComment  }) {
+export function Comment({ content, deleteComment }) {
     function handleDeleteComment() {
-        onDeleteComment(content)
+        deleteComment(content)
     }
-
 
     return (
         <div className={styles.comment}>
